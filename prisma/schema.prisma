@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Member {
+  id             Int         @id @default(autoincrement()) @map("id")
+  code           String      @unique @map("code")
+  name           String      @map("name")
+  email          String      @unique @map("email")
+  password       String      @map("password")
+  salt           String      @map("salt")
+  penaltyEndDate DateTime?   @map("penalty_end_date")
+  borrowings     Borrowing[] @relation("MemberBorrowings")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("members")
+}
+
+model Book {
+  id         Int         @id @default(autoincrement()) @map("id")
+  code       String      @unique @map("code")
+  title      String      @map("title")
+  author     String      @map("author")
+  stock      Int         @map("stock")
+  borrowings Borrowing[] @relation("BookBorrowings")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("books")
+}
+
+model Borrowing {
+  id         Int       @id @default(autoincrement()) @map("id")
+  memberId   Int       @map("member_id")
+  bookId     Int       @map("book_id")
+  borrowDate DateTime  @default(now()) @map("borrow_date")
+  returnDate DateTime? @map("return_date")
+
+  member Member @relation("MemberBorrowings", fields: [memberId], references: [id])
+  book   Book   @relation("BookBorrowings", fields: [bookId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("borrowings")
+}
+
+enum TransactionStatus {
+  PENDING   @map("pending")
+  COMPLETED @map("completed")
+  FAILED    @map("failed")
+}
+
+enum PaymentInterval {
+  DAILY   @map("daily")
+  WEEKLY  @map("weekly")
+  MONTHLY @map("monthly")
+  YEARLY  @map("yearly")
+}
