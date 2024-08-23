@@ -3,9 +3,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function initSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
-    .setTitle('CrediFlow - API')
+    .setTitle('Book Library - API')
     .setDescription(
-      `CrediFlow API is a lightweight backend application developed using NestJS, Prisma, and PostgreSQL.`,
+      `Book Library API is a lightweight backend application developed using NestJS, Prisma, and PostgreSQL.`,
     )
     .addBearerAuth(
       { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },

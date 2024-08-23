@@ -1,0 +1,40 @@
+export const memberList = {
+  totalDatas: 2,
+  page: 1,
+  limit: 10,
+  totalPages: 1,
+  data: [
+    {
+      id: 3,
+      code: 'M003',
+      name: 'Putri',
+      email: 'putri@gmail.com',
+      penaltyEndDate: null,
+      createdAt: '2024-08-23T09:49:16.779Z',
+      updatedAt: '2024-08-23T09:49:16.779Z',
+      borrowedBooks: [
+        {
+          id: 1,
+          code: 'JK-45',
+          title: 'Harry Potter',
+          author: 'J.K Rowling',
+          stock: 10,
+          createdAt: '2024-08-22T13:28:39.164Z',
+          updatedAt: '2024-08-22T13:28:39.164Z',
+        },
+      ],
+      borrowedBooksCount: 1,
+    },
+    {
+      id: 1,
+      code: 'M001',
+      name: 'Angga',
+      email: 'angga@gmail.com',
+      penaltyEndDate: null,
+      createdAt: '2024-08-22T14:32:17.288Z',
+      updatedAt: '2024-08-22T14:32:17.288Z',
+      borrowedBooks: [],
+      borrowedBooksCount: 0,
+    },
+  ],
+};

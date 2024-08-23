@@ -33,13 +33,19 @@ export class BookService {
         : undefined;
       const take = query?.limit ? Number(query.limit) : undefined;
 
-      const where: Prisma.BookWhereInput = {};
+      const where: Prisma.BookWhereInput = {
+        borrowings: {
+          none: {
+            returnDate: null, // Book is currently borrowed if returnDate is null
+          },
+        },
+      };
 
       const book = await this.prismaService.book.findMany({
+        where,
         orderBy: {
           createdAt: 'desc',
         },
-        where,
         skip,
         take,
       });

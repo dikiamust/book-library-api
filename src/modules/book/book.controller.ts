@@ -22,9 +22,7 @@ import { CreateBookDto, QueryBookList } from './dto';
 import { bookList, createBook } from './example-response';
 
 @ApiTags('Book')
-@ApiBearerAuth('authorization')
-@UseGuards(AuthGuard('jwt'))
-@Controller('book')
+@Controller()
 export class BookController {
   constructor(private readonly bookService: BookService) {}
 
@@ -39,13 +37,15 @@ export class BookController {
       },
     },
   })
-  @Post()
+  @ApiBearerAuth('authorization')
+  @UseGuards(AuthGuard('jwt'))
+  @Post('book')
   create(@Body() dto: CreateBookDto) {
     return this.bookService.create(dto);
   }
 
   @ApiOperation({
-    description: `Endpoint to retrieve a list of all Books.`,
+    description: `Endpoint to retrieve a list of all Books including the quantities. Books that are being borrowed are not counted.`,
   })
   @ApiOkResponse({
     description: 'Success Response',
@@ -55,8 +55,8 @@ export class BookController {
       },
     },
   })
-  @Get()
-  list(@User() user: IUserData, @Query() query: QueryBookList) {
+  @Get('public/book')
+  list(@Query() query: QueryBookList) {
     return this.bookService.list(query);
   }
 
@@ -71,7 +71,9 @@ export class BookController {
       },
     },
   })
-  @Put(':bookId')
+  @ApiBearerAuth('authorization')
+  @UseGuards(AuthGuard('jwt'))
+  @Put('book/:bookId')
   update(
     @Param('bookId') bookId: number,
     @Body() dto: CreateBookDto,

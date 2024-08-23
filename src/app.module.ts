@@ -8,6 +8,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { BookModule } from './modules/book/book.module';
+import { MemberModule } from './modules/member/member.module';
+import { BorrowingModule } from './modules/borrowing/borrowing.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { BookModule } from './modules/book/book.module';
     DatabaseModule,
     AuthModule,
     BookModule,
+    MemberModule,
+    BorrowingModule,
     CacheModule.register({
       ttl: 5 * 1000, // time to live (TTL) in seconds (5 seconds)
       max: 10, // the maximum number of items to store in cache memory
