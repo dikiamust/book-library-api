@@ -21,7 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "db:deploy": "prisma migrate deploy",
     "db:migrate": "prisma migrate dev",
-    "db:generate": "prisma generate"
+    "db:generate": "prisma generate",
+    "db:seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@nestjs/cache-manager": "^2.2.2",

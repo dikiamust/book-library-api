@@ -1,9 +1,3 @@
--- CreateEnum
-CREATE TYPE "TransactionStatus" AS ENUM ('pending', 'completed', 'failed');
-
--- CreateEnum
-CREATE TYPE "PaymentInterval" AS ENUM ('daily', 'weekly', 'monthly', 'yearly');
-
 -- CreateTable
 CREATE TABLE "members" (
     "id" SERIAL NOT NULL,

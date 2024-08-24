@@ -58,16 +58,3 @@ model Borrowing {
 
   @@map("borrowings")
 }
-
-enum TransactionStatus {
-  PENDING   @map("pending")
-  COMPLETED @map("completed")
-  FAILED    @map("failed")
-}
-
-enum PaymentInterval {
-  DAILY   @map("daily")
-  WEEKLY  @map("weekly")
-  MONTHLY @map("monthly")
-  YEARLY  @map("yearly")
-}

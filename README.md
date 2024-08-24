@@ -33,6 +33,13 @@ yarn db:migrate
 
 ```
 
+## Seeding
+
+```bash
+$ yarn db:seed
+
+```
+
 ## Running the unit-test
 
 ```bash
@@ -60,13 +67,14 @@ After running all the commands above and starting the application, you can acces
 
 ## Application Flow
 
-1. **Register**
+1. **Login**
 
-   - Use the registration endpoint (`POST /auth/signup`) to create a new user. Upon successful registration, a JWT token is generated. This token is required to access other endpoints.
+-After running all the commands above (install dependencies, run migration, seeder, and starting the application), use the login endpoint (`POST /auth/signin`) to generate a JWT token. This token is required to access other endpoints, except endpoints that start with /public.
+-You can use the user on the `GET /public/member` endpoint (all user using password 'Aa!45678').
 
-2. **Login**
+2. **Register**
 
-   - Alternatively, you can use the login endpoint (`POST /auth/signin`) to generate a JWT token. This token is necessary to access other endpoints.
+   - Alternatively, you can use the login endpoint (`POST /auth/signup`) to create a new account (member) instead upon successful registration, a JWT token is generated.
 
 3. **Get all existing books**
 
@@ -76,10 +84,10 @@ After running all the commands above and starting the application, you can acces
 
    - Use the `GET /public/member` endpoint to retrieve a list of all members along with the number of books currently being borrowed by each member.
 
-5. **Borrowing the Book.**
+5. **Borrowing the Book**
 
    - Use the `POST /borrowing/:bookId` endpoint to borrow a Book.
 
-6. **Returning the Book.**
+6. **Returning the Book**
 
    - Use the `PUT /borrowing/:bookId` endpoint to return a Book.
