@@ -29,25 +29,12 @@ describe('BookService', () => {
         {
           provide: PrismaService,
           useValue: {
-            borrowing: {
-              findMany: jest.fn(),
-              create: jest.fn(),
-              update: jest.fn(),
-              count: jest.fn(),
-            },
-            member: {
-              findFirst: jest.fn(),
-              update: jest.fn(),
-            },
             book: {
               findMany: jest.fn(),
               create: jest.fn(),
               update: jest.fn(),
               count: jest.fn(),
             },
-            $transaction: jest
-              .fn()
-              .mockImplementation((fn) => fn(prismaService)),
           },
         },
       ],
