@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   const salt = await bcrypt.genSalt();
-  const hash = await bcrypt.hash('Aa!45678', salt);
+  const hash = await bcrypt.hash('K*P&sD21', salt);
   for (const member of members) {
     const existingMember = await prisma.member.findUnique({
       where: { email: member.email },

@@ -70,11 +70,11 @@ After running all the commands above and starting the application, you can acces
 1. **Login**
 
    - After running all the commands above (install dependencies, run migration, seeder, and starting the application), use the login endpoint (`POST /auth/signin`) to generate a JWT token. This token is required to access other endpoints, except endpoints that start with /public.
-   - You can use the user on the `GET /public/member` endpoint (all user using password 'Aa!45678').
+   - You can use the user on the `GET /public/member` endpoint (all user using password 'K\*P&sD21').
 
 2. **Register**
 
-   - Alternatively, you can use the login endpoint (`POST /auth/signup`) to create a new account (member) instead upon successful registration, a JWT token is generated.
+   - Alternatively, you can use the login endpoint (`POST /auth/signup`) to create a new account (member) instead. Upon successful registration, a JWT token is generated.
 
 3. **Get all existing books**
 
