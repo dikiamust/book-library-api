@@ -15,8 +15,6 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from 'src/decorators';
-import { IUserData } from 'src/guards/strategy/interface/user-data.interface';
 import { BookService } from './book.service';
 import { CreateBookDto, QueryBookList } from './dto';
 import { bookList, createBook } from './example-response';
@@ -74,11 +72,7 @@ export class BookController {
   @ApiBearerAuth('authorization')
   @UseGuards(AuthGuard('jwt'))
   @Put('book/:bookId')
-  update(
-    @Param('bookId') bookId: number,
-    @Body() dto: CreateBookDto,
-    @User() user: IUserData,
-  ) {
+  update(@Param('bookId') bookId: number, @Body() dto: CreateBookDto) {
     return this.bookService.update(dto, bookId);
   }
 }
