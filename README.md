@@ -69,7 +69,7 @@ After running all the commands above and starting the application, you can acces
 
 1. **Login**
 
-   - After running all the commands above (install dependencies, run migration, seeder, and starting the application), use the login endpoint (`POST /auth/signin`) to generate a JWT token. This token is required to access other endpoints, except endpoints that start with /public.
+   - After running all the commands above (install dependencies, run migration, seeder, and starting the application), use the login endpoint (`POST /auth/signin`) to generate a JWT token. This token is required to access other endpoints, except endpoints that start with `/public`.
    - You can use the user on the `GET /public/member` endpoint (all user using password 'K\*P&sD21').
 
 2. **Register**
