@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/config/database/prisma.service';
 
 @Injectable()
@@ -46,7 +50,7 @@ export class BorrowingService {
       });
 
       if (
-        isPenalized?.penaltyEndDate ||
+        isPenalized?.penaltyEndDate &&
         isPenalized?.penaltyEndDate >= new Date()
       ) {
         throw new BadRequestException(
@@ -61,17 +65,26 @@ export class BorrowingService {
         },
       });
     } catch (error) {
+      if (error?.code === 'P2003') {
+        throw new NotFoundException('Book not found.');
+      }
       throw new BadRequestException(error?.message || 'Something went wrong');
     }
   }
 
   async returnBook(bookId: number, memberId: number) {
     try {
+      const isBookExist = await this.prismaService.book.findFirstOrThrow({
+        where: {
+          id: bookId,
+        },
+      });
+
       // Check whether the book was borrowed by the member concerned
       const borrowedBook = await this.prismaService.borrowing.findFirst({
         where: {
-          bookId: bookId,
-          memberId: memberId,
+          bookId,
+          memberId,
           returnDate: null,
         },
       });
@@ -112,6 +125,9 @@ export class BorrowingService {
 
       return result;
     } catch (error) {
+      if (error?.code === 'P2025') {
+        throw new NotFoundException('Book not found.');
+      }
       throw new BadRequestException(error?.message || 'Something went wrong');
     }
   }
