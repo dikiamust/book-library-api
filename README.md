@@ -74,7 +74,7 @@ After running all the commands above and starting the application, you can acces
 
 2. **Register**
 
-   - Alternatively, you can use the login endpoint (`POST /auth/signup`) to create a new account (member) instead. Upon successful registration, a JWT token is generated.
+   - Alternatively, you can use the register endpoint (`POST /auth/signup`) to create a new account (member) instead. Upon successful registration, a JWT token is generated.
 
 3. **Get all existing books**
 
